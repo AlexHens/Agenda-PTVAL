@@ -1,0 +1,1 @@
+enum tipoUsuario{ALUMNO,PROFESOR,ADMINISTRADOR}

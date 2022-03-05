@@ -1,0 +1,1 @@
+enum tipoInfo{TEXTO, PICTOGRAMAS}

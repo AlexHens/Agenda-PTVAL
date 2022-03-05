@@ -1,0 +1,1 @@
+enum tipoPlato{PRIMERO,SEGUNDO,POSTRE}
