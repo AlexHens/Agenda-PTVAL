@@ -1,0 +1,39 @@
+version: '3'
+ 
+services:
+  db:
+    image: mysql:5.7
+    command: --max_connections=10000
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: asociacionparchis
+      MYSQL_DATABASE: agendaptval_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "6033:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+  fileupload:
+    image: julienmeerschart/simple-file-upload-download-server
+    container_name: fileserver
+    links:
+      - db
+    environment:
+      SERVER: localhost
+    volumes:
+      -  ./data/files:/tmp
+    ports:
+      - "3000:3000"
